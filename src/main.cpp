@@ -26,7 +26,7 @@ string missingMsg(const fs::path& path);
 string mismatchMsg(const fs::path& first, const fs::path& second);
 string resultsMsg(long long count, long long missing, long long matches, long long mismatches, long long errors);
 
-int main(int argc, char* argv[]) {
+int main() {
 	try {
 		const auto first = getInputPath("first");
 		const auto second = getInputPath("second");
