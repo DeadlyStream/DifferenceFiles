@@ -42,11 +42,6 @@ int main() {
 void runDifferences(const fs::path& first, const fs::path& second, const fs::path& output) {
 	ofstream logFile;
 	ofstream* logger = nullptr;
-	long long missing = 0;
-	long long matches = 0;
-	long long mismatches = 0;
-	long long errors = 0;
-	long long count = 0;
 
 	if( !output.empty() ) {
 		logFile.open(output);
@@ -54,7 +49,13 @@ void runDifferences(const fs::path& first, const fs::path& second, const fs::pat
 	}
 
 	printLog(searchMsg(first, second), logger);
-	printLog("\n");
+	printLog("\n", logger);
+
+	long long count = 0;
+	long long missing = 0;
+	long long matches = 0;
+	long long mismatches = 0;
+	long long errors = 0;
 
 	for( const auto& entry : fs::recursive_directory_iterator(first) ) {
 		cout << '\b';
@@ -89,7 +90,7 @@ void runDifferences(const fs::path& first, const fs::path& second, const fs::pat
 	}
 	cout << "\b ";
 
-	printLog("\n");
+	printLog("\n", logger);
 	printLog(resultsMsg(count, missing, matches, mismatches, errors), logger);
 }
 
